@@ -3,9 +3,10 @@ import java.io.IOException;
 
 
 public class DniInvalido extends IOException {
- public DniInvalido(String mensaje) {
-     super(mensaje);
- }
+	
+	 public DniInvalido(String mensaje) {
+	     super(mensaje);
+	 }
 }
 
 
