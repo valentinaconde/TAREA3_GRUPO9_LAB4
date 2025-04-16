@@ -1,6 +1,7 @@
 package ejercicio1;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -87,6 +88,25 @@ public class Archivo {
 		return false;
 			
 	}
+	
+	
+	public void cargarArchivo(Set<Persona> personas, String ruta) {
+		 try { 
+			 FileWriter entrada = new FileWriter(ruta,true);
+			 BufferedWriter miBuffer = new BufferedWriter(entrada); 
+            for (Persona p : personas) {
+                miBuffer.write(p.toString()); 
+                miBuffer.newLine();  
+            }
+            System.out.println("Archivo cargado correctamente.");
+            
+            miBuffer.close();
+            entrada.close();
+        } catch (IOException e) {
+            System.out.println("Error al cargar el archivo.");
+            e.printStackTrace();
+        }
+    }
 	
 }
 

@@ -1,24 +1,28 @@
 package ejercicio1;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.Set;
 
 public class Principal {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+		
 		Archivo archivo = new Archivo();
 		archivo.setRuta("Personas.txt");
 		
 		Archivo nuevoArchivo = new Archivo();
 		nuevoArchivo.setRuta("Resultado.txt");
-		
+		Set<Persona> personas;
 		if(archivo.existeArchivo())
 		{
 			System.out.println("Existe archivo");
 			//punto 2
-			Set<Persona> personas = Archivo.leerArchivo(archivo.getRuta());
+			personas = Archivo.leerArchivo(archivo.getRuta());
 
-			for (Persona p : personas) {
+		
+		 for (Persona p : personas) {
 				System.out.println(p);
 			}
 		}
@@ -29,11 +33,30 @@ public class Principal {
 			
 		}
 		
-		//punto 3
-		nuevoArchivo.creaArchivo(nuevoArchivo.getRuta());
-
 		
+		//punto 3
+		
+		//crea y carga el archivo Resultado.txt
+		nuevoArchivo.creaArchivo(nuevoArchivo.getRuta());
+		nuevoArchivo.cargarArchivo(personas, nuevoArchivo.getRuta());
+
+		 //Lee y muestra el archivo con los datos cargados anteriormente
+		try {
+		        FileReader entrada = new FileReader(nuevoArchivo.getRuta());
+		        BufferedReader miBuffer = new BufferedReader(entrada);
+
+		        String linea;
+
+		        while ((linea = miBuffer.readLine()) != null) { 
+		        	System.out.println(linea);
+		        }
+		       entrada.close();
+		       miBuffer.close();}
+		 catch (IOException e) {
+			System.out.println("Error al leer el archivo");
+		}
 		
 	}
 
 }
+	
