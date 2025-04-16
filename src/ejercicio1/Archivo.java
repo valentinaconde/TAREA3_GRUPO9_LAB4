@@ -3,6 +3,7 @@ package ejercicio1;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Set;
 import java.util.TreeSet;
@@ -58,6 +59,8 @@ public class Archivo {
 	    return listaOrdenada;
 		
 	}
+	
+	
 
 	// getters y setters
 	public String getRuta() {
@@ -67,7 +70,23 @@ public class Archivo {
 	public void setRuta(String ruta) {
 		this.ruta = ruta;
 	}
+	
+	//punto 3
 
+	public boolean creaArchivo(String RutaResultado)
+	{
+		FileWriter escritura;
+		try {
+			escritura = new FileWriter(ruta, false);
+			escritura.write("");
+			escritura.close();
+			return true;
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return false;
+			
+	}
 	
 }
 

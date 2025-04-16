@@ -9,21 +9,31 @@ public class Principal {
 		Archivo archivo = new Archivo();
 		archivo.setRuta("Personas.txt");
 		
+		Archivo nuevoArchivo = new Archivo();
+		nuevoArchivo.setRuta("Resultado.txt");
+		
 		if(archivo.existeArchivo())
 		{
 			System.out.println("Existe archivo");
+			//punto 2
+			Set<Persona> personas = Archivo.leerArchivo(archivo.getRuta());
+
+			for (Persona p : personas) {
+				System.out.println(p);
+			}
 		}
 		else
 		{
-			System.out.println("No existe archivo entonces lo creo");
-			//archivo.creaArchivo();
+			System.out.println("Archivo Inexistente");
+			return;
+			
 		}
 		
-		Set<Persona> personas = Archivo.leerArchivo(archivo.getRuta());
+		//punto 3
+		nuevoArchivo.creaArchivo(nuevoArchivo.getRuta());
 
-		for (Persona p : personas) {
-			System.out.println(p);
-		}
+		
+		
 	}
 
 }
