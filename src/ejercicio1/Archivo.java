@@ -23,50 +23,39 @@ public class Archivo {
 	public static  Set<Persona> leerArchivo(String ruta){
 		
 		Set<Persona> listaOrdenada = new TreeSet<>();
-		
-		try {
-			FileReader entrada;
-			entrada = new FileReader(ruta);
-			BufferedReader buffer = new BufferedReader(entrada);
-			
-			String linea ;
-			
-			linea = buffer.readLine();
-			while(linea != null) {
-				
-				try {
-				
-					String[] datos = linea.split("-");
-					
-					if (datos.length == 3) {
-                        String nombre = datos[0];
-                        String apellido = datos[1];
-                        String dni = datos[2];
-                        
-                       
-                        VerificadorDni.verificarDniInvalido(dni);
-                        
-                        //
-                        Persona persona = new Persona(nombre, apellido, dni);
-                        listaOrdenada.add(persona);
-                    }
-				}catch (DniInvalido e) {
-                    
-                    System.out.println("El DNI es invalido " );
-                }
-				
-				linea = buffer.readLine();
-			}
-			
-			buffer.close();
-			entrada.close();
 
-			
-		}catch (IOException e) {
-			System.out.println("no se eoncontro el archivo");
-		}
-		
-		return listaOrdenada;
+	    try {
+	        FileReader entrada = new FileReader(ruta);
+	        BufferedReader buffer = new BufferedReader(entrada);
+
+	        String linea;
+
+	        while ((linea = buffer.readLine()) != null) {
+	            String[] datos = linea.split("-");
+
+	            if (datos.length == 3) {
+	                String nombre = datos[0];
+	                String apellido = datos[1];
+	                String dni = datos[2];
+
+	                try {
+	                    VerificadorDni.verificarDniInvalido(dni);
+	                    Persona persona = new Persona(nombre, apellido, dni);
+	                    listaOrdenada.add(persona);
+	                } catch (DniInvalido e) {
+	                    System.out.println("El DNI es inválido para " + nombre + " " + apellido);
+	                }
+	            }
+	        }
+
+	        buffer.close();
+	        entrada.close();
+
+	    } catch (IOException e) {
+	        System.out.println("No se encontró el archivo");
+	    }
+
+	    return listaOrdenada;
 		
 	}
 
